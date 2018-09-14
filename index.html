@@ -1,7 +1,39 @@
 <html>
 <head>
-<link rel="stylesheet" href="style.css" type="text/css">
-<script>
-    
-</script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="script.js"></script>
 </head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 10px">
+            <div class="col-sm-2">
+                <button id="difficultyButton">
+                    Change difficulty
+                </button>
+                <p id="difficulty">Easy</p>
+            </div>
+            <div class="col-sm-8" style="text-align: center">
+                <p>
+                    To play the game, click on the black bar at the top. A ball will <br>
+                    drop from the bar. To score, the ball most hit the moving target. <br>
+                    On hard mode, missing the target will decrease your score.
+                </p>
+            </div>
+            <div class="row-sm-2">
+                <p id="score">Score :</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="blackbar"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="ball"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

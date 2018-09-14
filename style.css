@@ -1,0 +1,14 @@
+#blackbar {
+    height: 2em;
+    width: 100%;
+    background-color: black;
+    margin-top: 4em;
+}
+#ball {
+    width: 7em;
+    height: 2em;
+    border-radius: 3em;
+    background-color: black; 
+    position: relative;
+    top: 30em;
+}
