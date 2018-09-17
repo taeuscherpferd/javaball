@@ -16,3 +16,7 @@ p {
     display: inline;
     margin: 1em;
 }
+#gameArea {
+    width: 100%;
+    height: 85%;
+}
