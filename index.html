@@ -8,32 +8,27 @@
     <div class="container-fluid">
         <div class="row" style="margin-top: 10px">
             <div class="col-sm-2">
-                <button id="difficultyButton">
+                <button id="difficultyButton" onclick="changeDifficulty()">
                     Change difficulty
                 </button>
                 <p id="difficulty">Easy</p>
+                <button id="startGame" onclick="startGame()">Start Game</button>
             </div>
             <div class="col-sm-8" style="text-align: center">
                 <p>
                     To play the game, click on the black bar at the top. A ball will <br>
                     drop from the bar. To score, the ball most hit the moving target. <br>
-                    On hard mode, missing the target will decrease your score.
+                    On hard mode, missing the target will decrease your score. <br> 
+                    Once you begin you will have one minute to play.
                 </p>
             </div>
             <div class="row-sm-2">
-                <p id="score">Score :</p>
+                <p id="score">Score: </p>
+                <p id="timer">Time: </p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="blackbar" onclick="dropBall()"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="ball"></div>
-            </div>
-        </div>
+        <canvas id="gameArea">
+        </canvas>
     </div>
 </body>
 </html>
