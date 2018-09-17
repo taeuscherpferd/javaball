@@ -12,3 +12,7 @@
     position: relative;
     top: 30em;
 }
+p {
+    display: inline;
+    margin: 1em;
+}
