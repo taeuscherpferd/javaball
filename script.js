@@ -1,29 +1,43 @@
 var myGamePiece;
-var myGameArea = document.getElementById("gameArea");
-var myScore = document.getElementById("score");
+/* var myScore = document.getElementById("score");
 var startGameButton = document.getElementById("startGame");
 var changeDifficultyButton = document.getElementById("difficultybutton");
 var timer = document.getElementById("timer");
-
-//Just in case ;) 
+var myGamePiece;
+ */
 var myObstacles = [];
+var isStarted = false;
+var myScore;
 
-//Called from HTML
 function startGame() {
+  if (isStarted == false) {
+    myGamePiece = new component(30, 30, "cyan", 10, 120);
+    myGamePiece.gravity = 0.05;
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGameArea.start();
+  }
+  else {
+    myGameArea.clear();
     myGamePiece = new component(30, 30, "red", 10, 120);
     myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
     myGameArea.start();
-    myGameArea.interval = setInterval(updateGameArea, 20);
+  }
 }
 
-//Called from HTML
-function changeDifficulty() {
-
-}
-
-function dropBall() {
-
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 780;
+        this.canvas.height = 570;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.lastChild);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 }
 
 function component(width, height, color, x, y, type) {
