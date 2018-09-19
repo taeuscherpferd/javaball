@@ -77,16 +77,6 @@ function component(width, height, color, x, y, type) {
     this.gravitySpeed += this.gravity;
     this.x += this.speedX;
     this.y += this.speedY + this.gravitySpeed;
-    this.hitBottom();
-  }
-
-  this.hitBottom = function () {
-    var rockbottom = myGameArea.canvas.height - this.height;
-    if (this.y > rockbottom) {
-      this.y = rockbottom;
-      this.gravitySpeed = 0;
-      delete this;
-    }
   }
 
   this.crashWith = function (otherobj) {
@@ -107,7 +97,6 @@ function component(width, height, color, x, y, type) {
   }
 }
 
-//Called when the mouse clicks on the screen breaks with scrolling.
 function onMouseClick(ev) {
   var x = ev.clientX - myGameArea.canvas.getBoundingClientRect().left;
   var y = ev.clientY - myGameArea.canvas.getBoundingClientRect().top;
@@ -118,9 +107,7 @@ function onMouseClick(ev) {
   }
 }
 
-//Called every 20 ms as defined in the gameArea FuncClass upove
 function updateGameArea() {
-  //var x, height, gap, minHeight, maxHeight, minGap, maxGap;
   for (i = 0; i < ballz.length; i++) {
     if ((basket.crashWith(ballz[i]))) {
       scoreCount++;
@@ -131,20 +118,6 @@ function updateGameArea() {
 
   myGameArea.clear();
   myGameArea.frameNo += 1;
-
-  //Wall generator
-/*  if (myGameArea.frameNo == 1 || everyInterval(150)) {
-    x = myGameArea.canvas.width;
-    minHeight = 20;
-    maxHeight = 200;
-    height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-    minGap = 50;
-    maxGap = 200;
-    gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
-    basket.push(new component(10, height, "green", x, 0));
-    basket.push(new component(10, x - height - gap, "green", x, height + gap));
-  }
-*/
 
   //Basket mover
   if (direction == "right") {
@@ -167,9 +140,9 @@ function updateGameArea() {
     basket.update();
   }
 
-  //baller 
+  //Update the ball position
   for (i = 0; i < ballz.length; i++) {
-    ballz[i].y += 1;
+    ballz[i].newPos();
     ballz[i].update();
     if (ballz[i].y > 555) {
       delete ballz.splice(i, 1);
@@ -180,7 +153,6 @@ function updateGameArea() {
     }
   }
 
-  //Update other things
   myScore.update();
 }
 
@@ -192,11 +164,3 @@ function changeDifficulty() {
     }
     document.getElementById('difficulty').innerText = difficulty;
 }
-
-//Part of the wall Generator logic
-/*
-function everyInterval(n) {
-  if ((myGameArea.frameNo / n) % 1 == 0) { return true; }
-  return false;
-}
-*/
