@@ -28,7 +28,7 @@ var myGameArea = {
     this.canvas.width = 780;
     this.canvas.height = 570;
     this.context = this.canvas.getContext("2d");
-    document.body.insertBefore(this.canvas, document.body.lastChild);
+    document.getElementById('gameContainer').appendChild(this.canvas);
     this.frameNo = 0;
     this.interval = setInterval(updateGameArea, 20);
   },
