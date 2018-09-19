@@ -11,16 +11,21 @@ var isStarted = false;
 var scoreCount = 0;
 var direction = "right";
 var myScore;
+var timer;
 var difficulty = 'easy';
+var time = 2;
 
 function startGame() {
   if (isStarted == false) {
     basket = new component(50, 15, "black", 10, 500);
     myScore = new component("30px", "Consolas", "black", 600, 40, "text");
+    timer = new component("30px", "Consolas", "black", 400, 40, "text");
+    timer.text = "Time: " + time;
     myScore.text = "SCORE: " + scoreCount;
     myGameArea.start();
     document.getElementById('difficultyButton').hidden = true;
     document.getElementById('startGame').hidden = true;
+    document.getElementById('restartGame').hidden = true;
   }
 }
 
@@ -71,6 +76,10 @@ function component(width, height, color, x, y, type) {
       ctx.fillStyle = color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
     }
+    ctx.beginPath();
+    ctx.moveTo(0, myGameArea.canvas.height / 2);
+    ctx.lineTo(myGameArea.canvas.width, myGameArea.canvas.height / 2);
+    ctx.stroke();
   }
 
   this.newPos = function () {
@@ -111,7 +120,9 @@ function component(width, height, color, x, y, type) {
 function onMouseClick(ev) {
   var x = ev.clientX - myGameArea.canvas.getBoundingClientRect().left;
   var y = ev.clientY - myGameArea.canvas.getBoundingClientRect().top;
-
+  if(y > myGameArea.canvas.height / 2) {
+      return;
+  }
   ballz.push(new component(15, 15, "blue", x, y, "ball"));
   for (i = 0; i < ballz.length; i++) {
     ballz[i].update();
@@ -120,6 +131,17 @@ function onMouseClick(ev) {
 
 //Called every 20 ms as defined in the gameArea FuncClass upove
 function updateGameArea() {
+    if (time <= 0) {
+        clearInterval(myGameArea.interval);
+        document.getElementById('restartGame').hidden = false;
+        document.getElementById('difficultyButton').hidden = false;
+        return;
+    }
+    time -= .02;
+    if (time < 0) {
+        time = 0;
+    }
+    timer.text = "Time: " + time.toFixed(2);
   //var x, height, gap, minHeight, maxHeight, minGap, maxGap;
   for (i = 0; i < ballz.length; i++) {
     if ((basket.crashWith(ballz[i]))) {
@@ -182,6 +204,7 @@ function updateGameArea() {
 
   //Update other things
   myScore.update();
+  timer.update();
 }
 
 function changeDifficulty() {
@@ -191,6 +214,14 @@ function changeDifficulty() {
         difficulty = 'easy';
     }
     document.getElementById('difficulty').innerText = difficulty;
+}
+
+function restartGame() {
+    scoreCount = 0;
+    time = 2;
+    myGameArea.context.clearRect(0, 0, myGameArea.canvas.width,  myGameArea.canvas.height);
+    document.getElementsByTagName('canvas').remove;
+    startGame();
 }
 
 //Part of the wall Generator logic
