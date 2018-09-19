@@ -11,6 +11,7 @@ var isStarted = false;
 var scoreCount = 0;
 var direction = "right";
 var myScore;
+var difficulty = 'easy';
 
 function startGame() {
   if (isStarted == false) {
@@ -18,6 +19,8 @@ function startGame() {
     myScore = new component("30px", "Consolas", "black", 600, 40, "text");
     myScore.text = "SCORE: " + scoreCount;
     myGameArea.start();
+    document.getElementById('difficultyButton').hidden = true;
+    document.getElementById('startGame').hidden = true;
   }
 }
 
@@ -170,11 +173,24 @@ function updateGameArea() {
     ballz[i].update();
     if (ballz[i].y > 555) {
       delete ballz.splice(i, 1);
+      if (difficulty == 'hard') {
+            scoreCount--;                
+            myScore.text = "SCORE: " + scoreCount;
+      }
     }
   }
 
   //Update other things
   myScore.update();
+}
+
+function changeDifficulty() {
+    if (difficulty == 'easy') {
+        difficulty = 'hard';
+    } else {
+        difficulty = 'easy';
+    }
+    document.getElementById('difficulty').innerText = difficulty;
 }
 
 //Part of the wall Generator logic
