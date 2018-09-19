@@ -106,8 +106,8 @@ function component(width, height, color, x, y, type) {
 
 //Called when the mouse clicks on the screen breaks with scrolling.
 function onMouseClick(ev) {
-  var x = ev.clientX - myGameArea.canvas.offsetLeft;
-  var y = ev.clientY - myGameArea.canvas.offsetTop;
+  var x = ev.clientX - myGameArea.canvas.getBoundingClientRect().left;
+  var y = ev.clientY - myGameArea.canvas.getBoundingClientRect().top;
 
   ballz.push(new component(15, 15, "blue", x, y, "ball"));
   for (i = 0; i < ballz.length; i++) {
