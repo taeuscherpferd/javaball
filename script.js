@@ -13,7 +13,7 @@ var direction = "right";
 var myScore;
 var timer;
 var difficulty = 'easy';
-var time = 2;
+var time = 60;
 
 function startGame() {
   if (isStarted == false) {
@@ -191,7 +191,7 @@ function changeDifficulty() {
 
 function restartGame() {
     scoreCount = 0;
-    time = 2;
+    time = 60;
     myGameArea.context.clearRect(0, 0, myGameArea.canvas.width,  myGameArea.canvas.height);
     document.getElementsByTagName('canvas').remove;
     startGame();
